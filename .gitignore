@@ -1,0 +1,22 @@
+/config/database.yml
+/.bundle
+/log/*.log
+/tmp
+/public/uploads
+/public/assets
+/public/resource
+
+.env
+doc
+
+# Mac specific
+.DS_Store
+
+# ignore swap file
+*~
+.swp
+*.keep
+
+passenger*
+# ignore files and folders by xiaotian
+# /vendor
