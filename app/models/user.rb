@@ -37,4 +37,8 @@ class User < ActiveRecord::Base
   def customer?
     role == 'Customer'
   end
+
+  def can_access?(request)
+    department_id == request.department_id
+  end
 end

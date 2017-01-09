@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :check_user_access, only: [:show, :edit, :update, :destroy]
 
   # GET /requests
   # GET /requests.json
@@ -62,13 +63,21 @@ class RequestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_request
-      @request = Request.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def request_params
-      params.require(:request).permit(:title, :description, :status, :unique_id, :department_id, :requested_by, :updated_by)
-    end
+  # Check access and redirect users who do not have previleges
+  def check_user_access
+    return true if current_user.can_access?(@request)
+    redirect_to requests_path, alert: 'You do not have previleges to perform this Action!'
+  end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_request
+    @request = Request.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def request_params
+    params.require(:request).permit(:title, :description, :status, :unique_id, :department_id, :requested_by,
+      :updated_by)
+  end
 end

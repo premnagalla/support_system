@@ -7,8 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <%= render :partial => 'layouts/messages' %>
+  <% if user_signed_in? %>
+    <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+  <% end %>
+  <%= yield %>
 </body>
 </html>
