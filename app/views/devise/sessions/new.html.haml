@@ -1,0 +1,17 @@
+.container-fluid.login
+  .row
+    .col-md-4.col-md-offset-4
+      %h2
+        Log in
+      = form_for(resource, as: resource_name, url: session_path(resource_name), class: '.form-horizontal') do |f|
+        .form-group.field
+          %label.col-sm-2.control-label{:for => "inputEmail3"} Email
+          .col-sm-10
+            = f.email_field :email, autofocus: true, placeholder: 'Email', id: 'inputEmail3', class: 'form-control'
+        .form-group.field
+          %label.col-sm-2.control-label{:for => "inputPassword3"} Password
+          .col-sm-10
+            = f.password_field :password, autocomplete: "off", placeholder: 'Password', id: 'inputPassword3', class: 'form-control'
+        .form-group.actions
+          .col-sm-offset-2.col-sm-10
+            = f.submit "Sign in", class: 'btn btn-default'

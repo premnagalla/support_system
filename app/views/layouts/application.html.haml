@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %title SupportSystem
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-inverse
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#myNavbar", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "#"} Logo
+        #myNavbar.collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li.active
+              = link_to "Requests", requests_path
+            - if user_signed_in?
+              %li
+                = link_to "Profile", edit_user_path(current_user)
+            %li
+              = link_to "Departments", departments_path
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              - if user_signed_in?
+                = link_to "<span class='glyphicon glyphicon-log-out'></span> Logout".html_safe,
+                  destroy_user_session_path, method: :delete
+              - else
+                = link_to "<span class='glyphicon glyphicon-log-in'></span> Login".html_safe, new_user_session_path
+    .container-fluid.text-center
+      = render partial: 'layouts/messages'
+      = yield
+
+    %footer.container-fluid.text-center
+      %p Customer Support System

@@ -21,6 +21,6 @@ class Request < ActiveRecord::Base
 
   # Methods
   def generate_unique_id
-    unique_id = "SR#{id.to_s.rjust(8, '0')}"
+    self.unique_id = "SR#{id.to_s.rjust(8, '0')}"
   end
 end
