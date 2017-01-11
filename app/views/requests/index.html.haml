@@ -1,7 +1,8 @@
-.row.content
+.row.content.layout-page
   .col-sm-2.sidenav
-    = render partial: 'requests/index', locals: { requests: @requests }
-  .col-sm-10.text-left
+    .list-group#resource_list
+      = render partial: 'requests/index', locals: { requests: @requests }
+  .col-sm-10.text-left#resource_detail
     %h1 Request
     %p
       test content

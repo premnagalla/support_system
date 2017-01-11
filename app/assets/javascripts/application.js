@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require_tree .
 //= require jquery.min
 //= require jquery_ujs
 //= require bootstrap

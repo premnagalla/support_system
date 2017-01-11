@@ -1,3 +1,2 @@
 - requests.each do |request|
-  %tr
-    %td= request.title
+  = link_to request.title, request_path(request), remote: true, class: 'list-group-item'
