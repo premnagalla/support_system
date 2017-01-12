@@ -1,0 +1,2 @@
+- render_partial = @request.errors.blank? ? 'requests/item' : 'requests/form'
+$('#item_detail').html("#{ escape_javascript(render(partial: render_partial, locals: { request: @request })) }");

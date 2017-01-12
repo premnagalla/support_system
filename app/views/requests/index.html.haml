@@ -1,9 +1,11 @@
 = render partial: 'layouts/sub_header'
 .row.content.layout-page
   .col-sm-2.sidenav
-    .list-group#resource_list
+    .list-group#item_list_container.item-list-container
       = render partial: 'requests/index', locals: { requests: @requests }
-  .col-sm-10.text-left#resource_detail
-    %h1 Request
-    %p
-      test content
+  .col-sm-8.text-left#item_detail.item-detail
+    - if @requests.present?
+      = render partial: 'requests/item', locals: { request: @requests.first }
+    - else
+      %p
+        There are no requests.

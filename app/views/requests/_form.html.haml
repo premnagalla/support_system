@@ -1,39 +1,34 @@
-= form_for(@request) do |f|
-  - if @request.errors.any?
+= form_for(request, remote: true, html: { class: 'form-horizontal' }) do |f|
+  - if request.errors.any?
     #error_explanation
       %h2
-        = pluralize(@request.errors.count, "error")
+        = pluralize(request.errors.count, "error")
         prohibited this request from being saved:
       %ul
-        - @request.errors.full_messages.each do |message|
+        - request.errors.full_messages.each do |message|
           %li= message
-  .field
-    = f.label :title
-    %br/
-    = f.text_field :title
-  .field
-    = f.label :description
-    %br/
-    = f.text_area :description
-  .field
-    = f.label :status
-    %br/
-    = f.text_field :status
-  .field
-    = f.label :unique_id
-    %br/
-    = f.text_field :unique_id
-  .field
-    = f.label :department_id
-    %br/
-    = f.number_field :department_id
-  .field
-    = f.label :requested_by
-    %br/
-    = f.number_field :requested_by
-  .field
-    = f.label :updated_by
-    %br/
-    = f.number_field :updated_by
-  .actions
-    = f.submit
+
+  .form-group.required
+    %label.col-sm-2.control-label Title
+    .col-sm-10
+      = f.text_field :title, placeholder: 'Email', class: 'form-control'
+  .form-group.required
+    %label.col-sm-2.control-label Description
+    .col-sm-10
+      = f.text_area :description, placeholder: 'Description', class: 'form-control'
+  .form-group.required
+    %label.col-sm-2.control-label Status
+    .col-sm-10
+      = f.select :status, Request::STATUSES, {}, { class: 'form-control' }
+  .form-group.required
+    %label.col-sm-2.control-label Department
+    .col-sm-10
+      = f.select :department_id, Department.all.collect{|dept| [dept.name, dept.id]}, {}, { class: 'form-control' }
+  .form-group.required
+    %label.col-sm-2.control-label Requested By
+    .col-sm-10
+      = f.select :requested_by, User.all.collect{|user| [user.full_name, user.id]}, {}, { class: 'form-control' }
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit 'Save', class: 'btn btn-primary btn-xs'
+      = link_to 'Cancel', request_path(request), remote: true, class: 'btn btn-default btn-xs' unless request.new_record?

@@ -1,31 +1,34 @@
-= form_for(@user) do |f|
+= form_for(@user, remote: true, html: { class: 'form-horizontal' }) do |f|
   - if @user.errors.any?
     #error_explanation
       %h2
         = pluralize(@user.errors.count, "error")
-        prohibited this user from being saved:
+        prohibited this request from being saved:
       %ul
         - @user.errors.full_messages.each do |message|
           %li= message
-  .field
-    = f.label :first_name
-    %br/
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    %br/
-    = f.text_field :last_name
-  .field
-    = f.label :email
-    %br/
-    = f.text_field :email
-  .field
-    = f.label :department_id
-    %br/
-    = f.number_field :department_id
-  .field
-    = f.label :role
-    %br/
-    = f.text_field :role
-  .actions
-    = f.submit
+
+  .form-group
+    %label.col-sm-2.control-label First Name
+    .col-sm-10
+      = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
+  .form-group
+    %label.col-sm-2.control-label Last Name
+    .col-sm-10
+      = f.text_area :last_name, placeholder: 'Last Name', class: 'form-control'
+  .form-group
+    %label.col-sm-2.control-label Email
+    .col-sm-10
+      = f.text_area :email, placeholder: 'Email', class: 'form-control'
+  .form-group
+    %label.col-sm-2.control-label Role
+    .col-sm-10
+      = f.select :role, User::ROLES, {}, { class: 'form-control' }
+  .form-group
+    %label.col-sm-2.control-label Department
+    .col-sm-10
+      = f.select :department_id, Department.all.collect{|dept| [dept.name, dept.id]}, {}, { class: 'form-control' }
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit 'Save', class: 'btn btn-primary btn-xs'
+      = link_to 'Cancel', user_path(user), remote: true, class: 'btn btn-default btn-xs'

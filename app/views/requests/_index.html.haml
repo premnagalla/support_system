@@ -1,2 +1,5 @@
-- requests.each do |request|
-  = link_to request.title, request_path(request), remote: true, class: 'list-group-item'
+= link_to '<span class="glyphicon glyphicon-plus"></span> New Request'.html_safe, new_request_path, remote: true,
+  class: 'list-group-item list-group-item-info', id: 'new_request'
+#item_list.item-list
+  - requests.each do |request|
+    = render partial: 'list_item', locals: { request: request }

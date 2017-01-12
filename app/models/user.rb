@@ -20,12 +20,17 @@ class User < ActiveRecord::Base
   delegate :requests, to: :department, prefix: true, allow_nil: true
 
   # Scopes
+  default_scope { order(created_at: :desc) }
   ROLES.each do |user_role|
     scope user_role.downcase.pluralize.to_sym, -> { where(role: user_role) }
   end
   scope :of_dept, ->(dept) { where(department_id: dept.id) }
 
   # Methods
+  def full_name
+    first_name + ' ' + last_name
+  end
+
   def admin?
     role == 'Admin'
   end

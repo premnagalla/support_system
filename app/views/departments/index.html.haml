@@ -1,16 +1,11 @@
-%p#notice= notice
-%h1 Listing Departments
-%table
-  %thead
-    %tr
-      %th Name
-      %th{:colspan => "3"}
-  %tbody
-    - @departments.each do |department|
-      %tr
-        %td= department.name
-        %td= link_to 'Show', department
-        %td= link_to 'Edit', edit_department_path(department)
-        %td= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Department', new_department_path
+= render partial: 'layouts/sub_header'
+.row.content.layout-page
+  .col-sm-2.sidenav
+    .list-group#item_list.item-list
+      = render partial: 'requests/index', locals: { requests: @requests }
+  .col-sm-10.text-left#item_detail.item-detail
+    - if @requests.present?
+      = render partial: 'requests/item', locals: { request: @requests.first }
+    - else
+      %p
+        There are no requests.
