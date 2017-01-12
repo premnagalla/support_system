@@ -1,25 +1,26 @@
-%p#notice= notice
-%p
-  %strong Title:
-  = @request.title
-%p
-  %strong Description:
-  = @request.description
-%p
-  %strong Status:
-  = @request.status
-%p
-  %strong Unique:
-  = @request.unique_id
-%p
-  %strong Department:
-  = @request.department_id
-%p
-  %strong Requested by:
-  = @request.requested_by
-%p
-  %strong Updated by:
-  = @request.updated_by
-= link_to 'Edit', edit_request_path(@request)
-|
-\#{link_to 'Back', requests_path}
+.page-right-container
+  %p#notice= notice
+  %p
+    %strong Title:
+    = @request.title
+  %p
+    %strong Description:
+    = @request.description
+  %p
+    %strong Status:
+    = @request.status
+  %p
+    %strong Unique:
+    = @request.unique_id
+  %p
+    %strong Department:
+    = @request.department_id
+  %p
+    %strong Requested by:
+    = @request.requested_by
+  %p
+    %strong Updated by:
+    = @request.updated_by
+  = link_to 'Edit', edit_request_path(@request)
+  |
+  \#{link_to 'Back', requests_path}
