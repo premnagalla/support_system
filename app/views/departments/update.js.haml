@@ -1,2 +1,4 @@
-- render_partial = @request.errors.blank? ? 'requests/item' : 'requests/form'
-$('#item_detail').html("#{ escape_javascript(render(partial: render_partial, locals: { request: @request })) }");
+- render_partial = @department.errors.blank? ? 'departments/item' : 'departments/form'
+$('#item_detail').html("#{ escape_javascript(render(partial: render_partial, locals: { department: @department })) }");
+- if @department.errors.blank?
+  $("#department_list_item_#{@department.id}").replaceWith("#{ escape_javascript(render(partial: 'list_item', locals: { department: @department })) }");

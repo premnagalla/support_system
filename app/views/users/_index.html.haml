@@ -1,5 +1,9 @@
-= link_to '<span class="glyphicon glyphicon-plus"></span> New User'.html_safe, new_user_path, remote: true,
-  class: 'list-group-item list-group-item-info', id: 'new_user'
-#item_list.item-list
-  - users.each do |user|
-    = render partial: 'list_item', locals: { user: user }
+.col-sm-2.sidenav
+  .list-group#item_list_container.item-list-container
+    = render partial: 'users/list', locals: { users: users }
+.col-sm-10.text-left#item_detail.item-detail
+  - if users.present?
+    = render partial: 'users/item', locals: { user: users.first }
+  - else
+    %p
+      There are no Users.

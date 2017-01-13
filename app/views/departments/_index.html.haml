@@ -1,2 +1,9 @@
-- requests.each do |request|
-  = link_to request.title, request_path(request), remote: true, class: 'list-group-item'
+.col-sm-2.sidenav
+  .list-group#item_list_container.item-list-container
+    = render partial: 'departments/list', locals: { departments: @departments }
+.col-sm-8.text-left#item_detail.item-detail
+  - if @departments.present?
+    = render partial: 'departments/item', locals: { department: @departments.first }
+  - else
+    %p
+      There are no Departments.

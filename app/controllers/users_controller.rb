@@ -36,8 +36,7 @@ class UsersController < ApplicationController
   private
 
   def check_user_access
-    return true if current_user.admin? || (current_user.id == params[:id])
-    redirect_to requests_path, alert: 'You do not have previleges to perform this Action!'
+    check_access_and_redirect(@user)
   end
 
   def set_user

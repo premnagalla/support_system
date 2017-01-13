@@ -23,11 +23,11 @@
   .form-group.required
     %label.col-sm-2.control-label Department
     .col-sm-10
-      = f.select :department_id, Department.all.collect{|dept| [dept.name, dept.id]}, {}, { class: 'form-control' }
+      = f.select :department_id, accessible_departments_for_select, {}, { class: 'form-control' }
   .form-group.required
     %label.col-sm-2.control-label Requested By
     .col-sm-10
-      = f.select :requested_by, User.all.collect{|user| [user.full_name, user.id]}, {}, { class: 'form-control' }
+      = f.select :requested_by, accessible_users_for_select, {}, { class: 'form-control' }
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit 'Save', class: 'btn btn-primary btn-xs'

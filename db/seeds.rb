@@ -43,7 +43,7 @@ departments.each do |department|
   # Create Customers
   3.times do |i|
     customers <<  create_user(first_name: "Customer#{department.id}_#{i + 1}", last_name: SERIES[i],
-                              department_id: department.id, role: 'Customer')
+                              department_id: nil, role: 'Customer')
   end
   p "created #{customers.size} Customers"
 end
@@ -53,7 +53,7 @@ customers.each do |customer|
   2.times do |i|
     request = create_request(title: "request_#{customer.id}_#{i + 1}",
                    description: "description_#{customer.id}_#{i + 1}",
-                   department_id: customer.department_id,
+                   department_id: departments.sample.id,
                    requested_by: customer.id)
 
     p request.errors.full_messages if request.errors.present?

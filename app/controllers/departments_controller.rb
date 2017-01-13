@@ -19,7 +19,7 @@ class DepartmentsController < ApplicationController
   def create
     @department = Department.new(department_params)
     @department.save
-    set_flash(@department, request.xhr?)
+    set_flash(@department, false)
   end
 
   def update

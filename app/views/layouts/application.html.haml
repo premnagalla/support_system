@@ -7,7 +7,9 @@
     = csrf_meta_tags
   %body
     = render partial: 'layouts/header'
-    .container-fluid.text-center
+    .container-fluid.text-center.layout-container
+      - if user_signed_in?
+        = render partial: 'layouts/sub_header'
       = yield
 
     %footer.container-fluid.text-center

@@ -18,7 +18,6 @@ class Request < ActiveRecord::Base
 
   # Scopes
   default_scope { order(created_at: :desc) }
-  scope :of_dept, ->(dept) { where(department_id: dept.id) }
 
   # Methods
   def generate_unique_id
@@ -28,5 +27,9 @@ class Request < ActiveRecord::Base
                            1
                          end
     self.unique_id = "SR#{next_sequential_id.to_s.rjust(8, '0')}"
+  end
+
+  def fix_updated_by(user_id)
+    self.updated_by = user_id
   end
 end

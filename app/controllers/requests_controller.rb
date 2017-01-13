@@ -18,11 +18,13 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
+    @request.fix_updated_by(current_user.id)
     @request.save
     set_flash(@request, false)
   end
 
   def update
+    @request.fix_updated_by(current_user.id)
     @request.update(request_params)
     set_flash(@request, false)
   end
@@ -36,8 +38,7 @@ class RequestsController < ApplicationController
 
   # Check access and redirect users who do not have previleges
   def check_user_access
-    return true if current_user.can_access?(@request)
-    redirect_to requests_path, alert: 'You do not have previleges to perform this Action!'
+    check_access_and_redirect(@request)
   end
 
   def set_request

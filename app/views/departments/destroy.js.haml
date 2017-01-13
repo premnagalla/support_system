@@ -1,0 +1,2 @@
+$("#department_list_item_#{@department.id}").remove();
+$('#item_detail').html("#{ escape_javascript(render(partial: 'departments/item', locals: { department: Department.first })) }");

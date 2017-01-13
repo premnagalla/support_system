@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def check_access_and_redirect(resource)
+    return true if current_user.can_access?(resource)
+    redirect_to requests_path, alert: 'You do not have previleges to perform this Action!'
+  end
+
   def set_flash(resource, is_delete)
     flash_type, message = fix_type_and_messae(resource, is_delete)
     flash.now[flash_type] = message

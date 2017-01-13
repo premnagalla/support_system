@@ -1,24 +1,8 @@
 .page-right-container
-  %p#notice= notice
+  - if notice.present?
+    %p#notice.alert.alert-success= notice
   %p
-    %strong Title:
-    = request.title
-  %p
-    %strong Description:
-    = request.description
-  %p
-    %strong Status:
-    = request.status
-  %p
-    %strong Unique:
-    = request.unique_id
-  %p
-    %strong Department:
-    = Department.find(request.department_id).try(&:name)
-  %p
-    %strong Requested by:
-    = User.find(request.requested_by).try(&:full_name)
-  %p
-    %strong Updated by:
-    = request.updated_by
-  = link_to 'Edit', edit_request_path(request), remote: true, class: 'btn btn-primary btn-xs'
+    %strong Name:
+    = department.name
+  = link_to 'Edit', edit_department_path(department), remote: true, class: 'btn btn-primary btn-xs'
+  = link_to 'Delete', department_path(department), remote: true, method: :delete, class: 'btn btn-danger btn-xs'
