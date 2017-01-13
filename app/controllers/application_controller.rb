@@ -20,4 +20,10 @@ class ApplicationController < ActionController::Base
     end
     [flash_type, message]
   end
+
+  # Check access and redirect users who do not have previleges
+  def check_admin_access
+    return true if current_user.admin?
+    redirect_to requests_path, alert: 'You do not have previleges to perform this Action!'
+  end
 end

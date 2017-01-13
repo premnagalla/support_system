@@ -15,11 +15,15 @@
   .form-group
     %label.col-sm-2.control-label Last Name
     .col-sm-10
-      = f.text_area :last_name, placeholder: 'Last Name', class: 'form-control'
+      = f.text_field :last_name, placeholder: 'Last Name', class: 'form-control'
   .form-group
     %label.col-sm-2.control-label Email
     .col-sm-10
-      = f.text_area :email, placeholder: 'Email', class: 'form-control'
+      = f.text_field :email, placeholder: 'Email', class: 'form-control'
+  .form-group
+    %label.col-sm-2.control-label Password
+    .col-sm-10
+      = f.password_field :password, class: 'form-control'
   .form-group
     %label.col-sm-2.control-label Role
     .col-sm-10
@@ -31,4 +35,4 @@
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit 'Save', class: 'btn btn-primary btn-xs'
-      = link_to 'Cancel', user_path(user), remote: true, class: 'btn btn-default btn-xs'
+      = link_to 'Cancel', user_path(user), remote: true, class: 'btn btn-default btn-xs' unless user.new_record?

@@ -1,0 +1,2 @@
+$("#request_list_item_#{@request.id}").remove();
+$('#item_detail').html("#{ escape_javascript(render(partial: 'requests/item', locals: { request: Request.first })) }");

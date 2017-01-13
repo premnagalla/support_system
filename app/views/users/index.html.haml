@@ -1,11 +1,11 @@
 = render partial: 'layouts/sub_header'
 .row.content.layout-page
   .col-sm-2.sidenav
-    .list-group#item_list.item-list
-      = render partial: 'requests/index', locals: { requests: @requests }
+    .list-group#item_list_container.item-list-container
+      = render partial: 'users/index', locals: { users: @users }
   .col-sm-10.text-left#item_detail.item-detail
-    - if @requests.present?
-      = render partial: 'requests/item', locals: { request: @requests.first }
+    - if @users.present?
+      = render partial: 'users/item', locals: { user: @users.first }
     - else
       %p
-        There are no requests.
+        There are no users.

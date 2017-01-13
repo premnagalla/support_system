@@ -1,0 +1,2 @@
+$("#user_list_item_#{@user.id}").remove();
+$('#item_detail').html("#{ escape_javascript(render(partial: 'users/item', locals: { user: User.first })) }");

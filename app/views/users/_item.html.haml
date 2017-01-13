@@ -1,24 +1,20 @@
 .page-right-container
-  %p#notice= notice
+  - if notice.present?
+    %p#notice.alert.alert-success= notice
   %p
-    %strong Title:
-    = request.title
+    %strong First Name:
+    = user.first_name
   %p
-    %strong Description:
-    = request.description
+    %strong Last Name:
+    = user.last_name
   %p
-    %strong Status:
-    = request.status
-  %p
-    %strong Unique:
-    = request.unique_id
+    %strong Email:
+    = user.email
   %p
     %strong Department:
-    = Department.find(request.department_id).try(&:name)
+    = user.department_id.present? ? Department.find(user.department_id).try(:name) : '-'
   %p
-    %strong Requested by:
-    = User.find(request.requested_by).try(&:full_name)
-  %p
-    %strong Updated by:
-    = request.updated_by
-  = link_to 'Edit', edit_request_path(request), remote: true, class: 'btn btn-primary btn-xs'
+    %strong Role:
+    = user.role
+  = link_to 'Edit', edit_user_path(user), remote: true, class: 'btn btn-primary btn-xs'
+  = link_to 'Delete', user_path(user), remote: true, method: :delete, class: 'btn btn-danger btn-xs' unless current_user.id == user.id

@@ -1,2 +1,4 @@
-- render_partial = @request.errors.blank? ? 'requests/item' : 'requests/form'
-$('#item_detail').html("#{ escape_javascript(render(partial: render_partial, locals: { request: @request })) }");
+- render_partial = @user.errors.blank? ? 'users/item' : 'users/form'
+$('#item_detail').html("#{ escape_javascript(render(partial: render_partial, locals: { user: @user })) }");
+- if @user.errors.blank?
+  $('#item_list').prepend("#{ escape_javascript(render(partial: 'list_item', locals: { user: @user })) }");

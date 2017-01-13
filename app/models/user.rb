@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   # Associations
   belongs_to :department
-  has_many :requests, foreign_key: :requested_by
+  has_many :my_requests, class_name: 'Request', foreign_key: :requested_by
 
   delegate :requests, to: :department, prefix: true, allow_nil: true
 
@@ -44,6 +44,17 @@ class User < ActiveRecord::Base
   end
 
   def can_access?(request)
-    department_id == request.department_id
+    admin? || (department_id == request.department_id)
+  end
+
+  def accessible_requests
+    case role
+    when 'Admin'
+      Request.all
+    when 'Agent'
+      department_requests
+    when 'Customer'
+      my_requests
+    end
   end
 end
